@@ -20,7 +20,6 @@ body {
 .bg-dark {
   background-color: #12002b;
 }
-
 .sr-only {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important; /* 1 */
@@ -105,7 +104,7 @@ body {
     height: 400px;
     background-position: 0% 33%;
   }
-
+  
   .hero-content {
     position: absolute;
     top: 50px;
@@ -113,11 +112,11 @@ body {
     width: 300px;
     margin: 2rem;
   }
-
+  
   .hero-content .subtitle {
     font-size: 1.5rem;
   }
-
+  
   .hero-content .text {
     font-size: 1.2rem;
   }
