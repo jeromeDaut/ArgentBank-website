@@ -9,11 +9,11 @@ const Form = () => {
         <form>
           <div className="input-wrapper">
             <label htmlFor="username">Username</label>
-            <input type="text" id="username" />
+            <input type="text" id="username"  autoComplete="username" />
           </div>
           <div className="input-wrapper">
             <label htmlFor="password">Password</label>
-            <input type="password" id="password" />
+            <input type="password" id="password" autoComplete='current-password' />
           </div>
           <div className="input-remember">
             <input type="checkbox" id="remember-me" />
