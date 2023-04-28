@@ -19,8 +19,11 @@ const Form = () => {
             <input type="checkbox" id="remember-me" />
             <label htmlFor="remember-me">Remember me</label>
           </div>
+          {/* PLACEHOLDER DUE TO STATIC SITE */}
           <Link to="./user" className="sign-in-button">Sign In</Link>
-          
+          {/* <!-- SHOULD BE THE BUTTON BELOW --> */}
+          {/* <!-- <button className="sign-in-button">Sign In</button> --> */}
+          {/* <!--  --> */}
         </form>
       </section>
     );
