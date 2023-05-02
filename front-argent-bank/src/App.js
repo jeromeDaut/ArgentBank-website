@@ -1,20 +1,19 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from './Pages/Home';
-import SignIn from './Pages/SignIn';
-import User from './Pages/User';
 import Navigation from './components/Navigation';
 import Footer from './components/Footer';
+import Login from './Pages/Login';
+import Profile from './Pages/Profile';
 
 const App = () => {
   return (
     <BrowserRouter>
-         <Navigation/>
-
+      <Navigation/>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/signIn" element={<SignIn />} />
-        <Route path="/signIn/user" element={<User />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/login/profile" element={<Profile />} />
       </Routes>
       <Footer />
     </BrowserRouter>
