@@ -4,7 +4,7 @@ import logo from '../designs/img/argentBankLogo.png'
 
 const Navigation = () => {
   const location = useLocation();
-  const isUserPage = location.pathname === "/signIn/user"; 
+  const isUserPage = location.pathname === "/login/profile"; 
 
     return (
     <nav className="main-nav">
@@ -29,7 +29,7 @@ const Navigation = () => {
         </Link>
       </>
     ) : (
-      <Link className="main-nav-item" to="/signIn">
+      <Link className="main-nav-item" to="/login">
         <i className="fa fa-user-circle"></i>
         Sign In
       </Link>

@@ -27,6 +27,6 @@ const Form = () => {
         </form>
       </section>
     );
-};
+  };
 
-export default Form;
+    export default Form;
