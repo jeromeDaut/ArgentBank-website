@@ -1,0 +1,9 @@
+@import './Pages/globalPages.css';
+@import './components/hero/hero.css';
+@import './components/feature/feature.css';
+@import './components/navigation/navigation.css';
+@import './components/footer/footer.css';
+@import './components/headerUser/headerUser.css';
+@import './components/form/form.css';
+@import './components/account/account.css';
+
