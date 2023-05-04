@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { signIn } from '../../app/slice/usersSlice';
 
 const Form = () => {
@@ -9,6 +9,7 @@ const Form = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState();
+ 
   let navigate = useNavigate();
 
   function handleSubmit(e) {
@@ -36,7 +37,6 @@ const Form = () => {
     .catch (err=> {
       console.log(err);
       setError(err);
-      alert('Une erreur est survenue. Veuillez réessayer plus tard.');
     })
   }
 
@@ -45,21 +45,24 @@ const Form = () => {
       <i className="fa fa-user-circle sign-in-icon"></i>
       <h1>Sign In</h1>
       <form onSubmit={handleSubmit}>
-      {error && <div>{error.toString()}</div>}
         <div className="input-wrapper">
-          <label htmlFor="username">Username</label>
-          <input type="text" id="username" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="username" />
+          <label htmlFor="email">Email</label>
+          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="username" required/>
         </div>
         <div className="input-wrapper">
-          <label htmlFor="password">Password</label>
-          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete='current-password' />
+          <label htmlFor="password" >Password</label>
+          <input required type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete='current-password' />
+      {error && <div style={{color: "red"}}><br/>{'The email or password is incorrect.'}</div>}
         </div>
         <div className="input-remember">
           <input type="checkbox" id="remember-me" />
           <label htmlFor="remember-me">Remember me</label>
         </div>
         <button type='submit' className="sign-in-button">Sign In</button>
+        <br/>
+        <Link  to="/login/signUp">Sign up</Link>
       </form>
+
     </section>
   );
 };
