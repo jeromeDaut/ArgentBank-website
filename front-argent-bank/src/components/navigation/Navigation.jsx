@@ -1,11 +1,17 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { signOut } from '../../app/slice/usersSlice';
 
 
 const Navigation = () => {
   const location = useLocation();
   const isUserPage = location.pathname === "/login/user"; 
+  const dispatch = useDispatch();
 
+  const handleSignOut = () => {
+    dispatch(signOut());
+  }
     return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
@@ -23,13 +29,13 @@ const Navigation = () => {
           <i className="fa fa-user-circle"></i>
           Tony
         </Link>
-        <Link className="main-nav-item" to="#">
+        <Link className="main-nav-item" to="/" onClick={handleSignOut}>
           <i className="fa fa-sign-out"></i>
           Sign Out
         </Link>
       </>
     ) : (
-      <Link className="main-nav-item" to="/login">
+      <Link className="main-nav-item" to="/login" >
         <i className="fa fa-user-circle"></i>
         Sign In
       </Link>
