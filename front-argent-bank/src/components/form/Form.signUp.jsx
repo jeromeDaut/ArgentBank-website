@@ -30,6 +30,8 @@ const FormSignUp = () => {
         navigate("../login");
 
         localStorage.setItem('token', token);
+        alert('Your account has been successfully created')
+
       }
       else {
         alert(res.data.message);

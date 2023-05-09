@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { signOut } from '../../app/slice/usersSlice';
+import { signOut } from '../../app/slice/userTokenSlice';
 
 
 const Navigation = () => {
