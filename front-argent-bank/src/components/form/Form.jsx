@@ -12,18 +12,20 @@ const Form = () => {
   
   const dispatch = useDispatch();
   let navigate = useNavigate();
-  const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(register({ email, password, isLoggedIn })).then(() => {
+      dispatch(register({ email, password })).then((response) => {
+      localStorage.setItem('token', response.payload.token);
       navigate('/login/user');
+      
     });
   }
   
- 
-  
-    
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  if (isLoggedIn === false) {
+    navigate('/login');
+  }
     return (
       <section className="sign-in-content">
       <i className="fa fa-user-circle sign-in-icon"></i>
