@@ -1,17 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { getProfile } from "../../app/services/getProfile";
+import { updateUserProfile } from "../../app/services/PutUserName";
 
 const HeaderUser = () => {
   const [userName, setUserName] = useState("");
   const [editing, setEditing] = useState(false);
   const [newUserName, setNewUserName] = useState("");
-
+  const [token, setToken] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      getProfile(token)
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
+      setToken(storedToken);
+      getProfile(storedToken)
         .then((data) => {
-          setUserName(data.userName);
+        setUserName(data.userName);
+        setFirstName(data.firstName);
+        setLastName(data.lastName);
         })
         .catch((error) => {
           console.log(error);
@@ -29,9 +36,14 @@ const HeaderUser = () => {
   };
 
   const handleSave = () => {
-    // TODO: Save new user name to backend
-    setUserName(newUserName);
-    setEditing(false);
+    updateUserProfile(token, newUserName)
+      .then(() => {
+        setUserName(newUserName);
+        setEditing(false);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -49,9 +61,9 @@ const HeaderUser = () => {
                 onChange={(e) => setNewUserName(e.target.value)}
               />
               <label htmlFor="firstName">First Name:</label>
-              <input type="text" id="firstName" value="John" disabled />
+              <input type="text" id="firstName" value={firstName} disabled />
               <label htmlFor="lastName">Last Name:</label>
-              <input type="text" id="lastName" value="Doe" disabled />
+              <input type="text" id="lastName" value={lastName} disabled />
               <button className="edit-button" type="button" onClick={handleSave}>
                 Save
               </button>
