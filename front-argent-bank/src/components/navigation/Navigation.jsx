@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { signOut } from '../../app/slice/userTokenSlice';
+import { logout } from '../../app/slice/usersSlice';
 
 
 const Navigation = () => {
@@ -10,7 +10,7 @@ const Navigation = () => {
   const dispatch = useDispatch();
 
   const handleSignOut = () => {
-    dispatch(signOut());
+    dispatch(logout());
   }
     return (
     <nav className="main-nav">
