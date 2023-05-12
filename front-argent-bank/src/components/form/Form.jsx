@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-// import { SignIn } from '../../app/slice/userTokenSlice';
 import { register } from '../../app/slice/usersSlice';
-// import { signIn } from '../../app/slice/userTokenSlice';
 
 const Form = () => {
   const [email, setEmail] = useState('');
