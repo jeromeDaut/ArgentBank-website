@@ -13,41 +13,40 @@ export const register = createAsyncThunk(
 const initialState={
     token: localStorage.getItem('token') || null,
     isLoggedIn: false,
-    email: null,
-
-    password: null,
-    firstName: null,
-    lastName: null,
     userName: null,
+
+    email: null,
+    password: null,
     loading: false,
     error: null
 }
 
-const userSlice= createSlice({
+const usersSlice= createSlice({
     name:'userSlice',
     initialState,
     reducers:{
-        extraReducers: (builder) => {
-            builder
-          .addCase(register.pending, (state) => {
-            state.loading = true;
-            state.error = null;
-          })
-          .addCase(register.fulfilled, (state, action) => {
-            state.loading = false;
-            state.token = action.payload.token;
-            state.isLoggedIn = true;
-            state.email = action.payload.email;
-            state.userName = action.payload.userName;
-          })
-          .addCase(register.rejected, (state, action) => {
-            state.loading = false;
-            state.error = action.error.message;
-          })
+      loginStart(state) {
+        state.isLoggedIn = false;
+        state.error = null;
+      },
+      loginSuccess(state, action) {
+        state.token = action.payload.token;
+        localStorage.setItem('token', action.payload); // Stockage du token dans le localStorage
+        state.isLoggedIn=true;
         
-        }
+      },
+      loginFailure(state, action) {
+        state.isLoggedIn = false;
+        state.error = action.payload.error;
+      },
+      logout(state) {
+        state.token = null;
+        localStorage.clear();
+        state.error = null;
+        state.isLoggedIn = false;
+      },
     }
 })
 
-export const {signIn, signOut} = userSlice.actions
-export default userSlice.reducer
+export const {  loginStart, loginSuccess, loginFailure, logout } = usersSlice.actions;
+export default usersSlice.reducer
