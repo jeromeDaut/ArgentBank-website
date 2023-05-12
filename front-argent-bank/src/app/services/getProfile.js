@@ -11,11 +11,12 @@ export const getProfile = (token) =>{
         },
     }
     )
-    
     .then(res=>{
         console.log(res.data.body.userName);
         return({
           userName: res.data.body.userName,
+          lastName: res.data.body.lastName,
+          firstName: res.data.body.firstName,
           token: token,
         });
     })
