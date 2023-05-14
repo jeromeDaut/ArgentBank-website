@@ -18,6 +18,9 @@
     text-decoration: none;
     margin-right: 0.5rem;
   }
+  .main-nav-item span {
+    margin-left: 5px;
+  }
   
   .main-nav-item:hover {
     text-decoration: underline;
