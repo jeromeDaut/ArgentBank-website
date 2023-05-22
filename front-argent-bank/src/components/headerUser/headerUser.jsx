@@ -1,33 +1,16 @@
-import React, { useEffect, useState } from "react";
-import { getProfile } from "../../app/services/getProfile";
-import { updateUserProfile } from "../../app/services/PutUserName";
+import React, {  useState } from "react";
+import { PutUserName } from "../../app/slice/usersSlice";
+import { useDispatch , useSelector } from 'react-redux';
 
 const HeaderUser = () => {
-  const [userName, setUserName] = useState("");
+  const dispatch = useDispatch();
+  let CurrentUser = useSelector((state) => state.usersReducer.currentUser); 
   const [editing, setEditing] = useState(false);
   const [newUserName, setNewUserName] = useState("");
-  const [token, setToken] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
   
-  useEffect(() => {
-    const storedToken = localStorage.getItem("token");
-    if (storedToken) {
-      setToken(storedToken);
-      getProfile(storedToken)
-        .then((data) => {
-        setUserName(data.userName);
-        setFirstName(data.firstName);
-        setLastName(data.lastName);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, []);
 
   const handleEdit = () => {
-    setNewUserName(userName);
+   
     setEditing(true);
   };
 
@@ -36,9 +19,8 @@ const HeaderUser = () => {
   };
 
   const handleSave = () => {
-    updateUserProfile(token, newUserName)
-      .then(() => {
-        setUserName(newUserName);
+    dispatch(PutUserName( newUserName))
+      .then(() => {        
         setEditing(false);
       })
       .catch((error) => {
@@ -61,9 +43,9 @@ const HeaderUser = () => {
                 onChange={(e) => setNewUserName(e.target.value)}
               />
               <label htmlFor="firstName">First Name:</label>
-              <input type="text" id="firstName" value={firstName} disabled />
+              <input type="text" id="firstName" value={CurrentUser.firstName} disabled />
               <label htmlFor="lastName">Last Name:</label>
-              <input type="text" id="lastName" value={lastName} disabled />
+              <input type="text" id="lastName" value={CurrentUser.lastName} disabled />
               <button className="edit-button" type="button" onClick={handleSave}>
                 Save
               </button>
@@ -75,9 +57,7 @@ const HeaderUser = () => {
         ) : (
           <>
             <h1>
-              Welcome back
-              <br />
-              {userName}
+              Welcome back <br/>{CurrentUser.userName}
             </h1>
             <button className="edit-button" onClick={handleEdit}>
               Edit Name
