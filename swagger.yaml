@@ -2,8 +2,8 @@ swagger: '2.0'
 info:
   title: Bank Argent API documentation
   description: Contains all available API endpoints in this codebase
-  version: '1.0.0'
-  termsOfService: 'http://swagger.io/terms/'
+  version: 1.0.0
+  termsOfService: http://swagger.io/terms/
 host: localhost:3001
 basePath: /api/v1
 schemes:
@@ -65,8 +65,6 @@ paths:
         - User Module
       summary: User Profile API
       description: API for fetching a user profile
-      #produces:
-       # - application/json
       responses:
         '200':
           description: User profile retrieved successully
@@ -101,6 +99,55 @@ paths:
           description: Invalid Fields
         '500':
           description: Internal Server Error
+# TRANSACTIONS===================================================================
+  /user/transactions:
+    get:
+      tags:
+        - User Module
+      parameters:
+        - in: body
+          name: body
+          description: Update user profile attributes
+          required: true
+          schema:
+            $ref: '#/definitions/Transaction'
+      summary: Get Transactions List
+      responses:
+        '200':
+          description: Successful request
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+  /user/transactions/{transactionId}:
+    put:
+      tags:
+        - User Module
+      summary: Update Fields In Transaction
+      parameters:
+        - in: path
+          name: transactionId
+          description: ID of the transaction to be updated
+          required: true
+          type: string
+        - in: body
+          name: body
+          description: Fields to be updated for the transaction
+          required: true
+          schema:
+            $ref: '#/definitions/UpdateTransactionFields'
+      responses:
+        '200':
+          description: Successful request
+          schema:
+            $ref: '#/definitions/ApiResponse'
+        '400':
+          description: Invalid Fields
+        '500':
+          description: Internal Server Error
+# ==========================
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -156,3 +203,76 @@ definitions:
     properties:
       userName:
         type: string
+# DEFINITION FOR THE TRANSACTIONS==========================================
+  Transaction:
+    type: object
+    properties:
+      id:
+        type: string
+      accounts:
+        type: array
+        items:
+          $ref: '#/definitions/Account'
+    required:
+      - id
+      - accounts
+  Account:
+    type: object
+    properties:
+      id:
+        type: string
+      title:
+        type: string
+      amount:
+        type: string
+      description:
+        type: string
+      transactions:
+        type: array
+        items:
+          $ref: '#/definitions/TransactionItem'
+    required:
+      - id
+      - title
+      - amount
+      - description
+      - transactions
+  TransactionItem:
+    type: object
+    properties:
+      date:
+        type: string
+        format: date-time
+      description:
+        type: string
+      amount:
+        type: string
+      balance:
+        type: string
+      type:
+        type: string
+      category:
+        type: string
+      note:
+        type: string
+    required:
+      - date
+      - description
+      - amount
+      - balance
+      - type
+      - category
+      - note
+  UpdateTransactionFields:
+    type: object
+    properties:
+      category:
+        type: string
+        description: New category of the transaction
+      note:
+        type: string
+        description: New note of the transaction
+    required:
+      - category
+      - note
+# =========================
