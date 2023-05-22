@@ -1,33 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import React from 'react';
+import { Link} from 'react-router-dom';
+import { useDispatch , useSelector } from 'react-redux';
 import { logout } from '../../app/slice/usersSlice';
-import { getProfile } from "../../app/services/getProfile";
 
 
 const Navigation = () => {
-  const location = useLocation();
-  const isUserPage = location.pathname === "/login/user"; 
+
+  const isLoggedIn = useSelector((state) => state.usersReducer.isLoggedIn);
   const dispatch = useDispatch();
-  const [firstName, setFirstName] = useState("");
-  
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      getProfile(token)
-        .then((data) => {
-        setFirstName(data.firstName);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, []);
+  let userName  = useSelector((state) => state.usersReducer.currentUser.userName) ;
 
   const handleSignOut = () => {
     dispatch(logout());
-  };
-
+  }
   return (
     <nav className="main-nav">
       <Link className="main-nav-logo" to="/">
@@ -39,11 +24,11 @@ const Navigation = () => {
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
       <div>
-        {isUserPage ? (
+        {isLoggedIn ? (
           <>
-            <Link className="main-nav-item" to="">
+            <Link className="main-nav-item" to="login/dashboard">
               <i className="fa fa-user-circle"></i>
-              <span>{firstName}</span>
+              <span>{userName}</span>
             </Link>
             <Link className="main-nav-item" to="/" onClick={handleSignOut}>
               <i className="fa fa-sign-out"></i>
