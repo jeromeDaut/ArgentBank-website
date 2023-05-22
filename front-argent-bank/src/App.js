@@ -4,10 +4,11 @@ import Home from './Pages/Home';
 import Navigation from './components/navigation/Navigation';
 import Footer from './components/footer/Footer';
 import SignIn from './Pages/SignIn';
-import User from './Pages/User';
+import Dashboard from './Pages/Dashboard';
 import SignUp from './Pages/SignUp';
 
 const App = () => {
+
   return (
     <BrowserRouter>
       <Navigation/>
@@ -15,7 +16,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<SignIn />} />
         <Route path="/login/signUp" element={<SignUp />} />
-        <Route path="/login/user" element={<User />} />
+        <Route path="/login/dashboard/:id" element={<Dashboard />} />
       </Routes>
       <Footer />
     </BrowserRouter>
