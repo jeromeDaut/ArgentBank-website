@@ -6,19 +6,28 @@ import { login } from '../../app/slice/usersSlice';
 const Form = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
   function handleSubmit(e, id) {
     e.preventDefault();
-      dispatch(login({ email, password })).then((response) => {
-      // localStorage.setItem('token', response.payload.token);
-      navigate(`/login/dashboard/${currentUserId}`);
-      // navigate(`/login/dashboard/${id}`);
-      
-    });
+    if (!email || !password) {
+      setError('Please enter both email and password.');
+      return;
+    }
+    
+    dispatch(login({ email, password }))
+      .then((response) => {
+        localStorage.setItem('token', response.payload.token);
+        navigate(`/login/dashboard/${currentUserId}`);
+      })
+      .catch((error) => {
+        setError('Invalid email or password.');
+      });
   }
+  
   const currentUserId = useSelector((state) => state.usersReducer.currentUserId);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   if (isLoggedIn === false) {
@@ -28,6 +37,7 @@ const Form = () => {
       <section className="sign-in-content">
       <i className="fa fa-user-circle sign-in-icon"></i>
       <h1>Sign In</h1>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className="input-wrapper">
           <label htmlFor="email">Email</label>
