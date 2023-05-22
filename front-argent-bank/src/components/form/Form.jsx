@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
-import { register } from '../../app/slice/usersSlice';
+import { login } from '../../app/slice/usersSlice';
 
 const Form = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error] = useState();
   
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
-  function handleSubmit(e) {
+  function handleSubmit(e, id) {
     e.preventDefault();
-      dispatch(register({ email, password })).then((response) => {
-      localStorage.setItem('token', response.payload.token);
-      navigate('/login/user');
+      dispatch(login({ email, password })).then((response) => {
+      // localStorage.setItem('token', response.payload.token);
+      navigate(`/login/dashboard/${currentUserId}`);
+      // navigate(`/login/dashboard/${id}`);
       
     });
   }
-  
+  const currentUserId = useSelector((state) => state.usersReducer.currentUserId);
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   if (isLoggedIn === false) {
     navigate('/login');
@@ -36,7 +36,6 @@ const Form = () => {
         <div className="input-wrapper">
           <label htmlFor="password" >Password</label>
           <input required type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete='current-password' />
-          {error && <div style={{color: "red"}}><br/>{'The email or password is incorrect.'}</div>}
         </div>
         <div className="input-remember">
           <input type="checkbox" id="remember-me" />
