@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../app/slice/usersSlice';
+import {HiUserCircle} from 'react-icons/hi2'
 
 const Form = () => {
   const [email, setEmail] = useState('');
@@ -35,7 +36,7 @@ const Form = () => {
   }
     return (
       <section className="sign-in-content">
-      <i className="fa fa-user-circle sign-in-icon"></i>
+      <HiUserCircle className='sign-in-icon' />
       <h1>Sign In</h1>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>

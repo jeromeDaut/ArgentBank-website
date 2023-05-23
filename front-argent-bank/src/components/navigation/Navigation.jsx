@@ -2,7 +2,8 @@ import React from 'react';
 import { Link} from 'react-router-dom';
 import { useDispatch , useSelector } from 'react-redux';
 import { logout } from '../../app/slice/usersSlice';
-
+import {HiUserCircle} from 'react-icons/hi2'
+import {FaSignOutAlt} from 'react-icons/fa'
 
 const Navigation = () => {
 
@@ -25,21 +26,21 @@ const Navigation = () => {
         />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
-      <div>
+      <div className='align-nav-item'>
         {isLoggedIn ? (
           <>
             <Link className="main-nav-item" to="login/dashboard">
-              <i className="fa fa-user-circle"></i>
+              <HiUserCircle className="fa fa-user-circle" />
               <span>{userName}</span>
             </Link>
             <Link className="main-nav-item" to="/" onClick={handleSignOut}>
-              <i className="fa fa-sign-out"></i>
+              <FaSignOutAlt />
               Sign Out
             </Link>
           </>
         ) : (
           <Link className="main-nav-item" to="/login">
-            <i className="fa fa-user-circle"></i>
+            <HiUserCircle />
             Sign In
           </Link>
         )}
