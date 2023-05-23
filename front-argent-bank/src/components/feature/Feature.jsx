@@ -26,7 +26,7 @@ const Feature = () => {
           <div className="feature-item">
             <img
               src="/img/icon-money.webp"
-              alt="Chat Icon"
+              alt="Money Icon"
               className="feature-icon"
               width="100"
               height="100"
@@ -39,7 +39,7 @@ const Feature = () => {
           <div className="feature-item">
             <img
               src="/img/icon-security.webp"
-              alt="Chat Icon"
+              alt="Security Icon"
               className="feature-icon"
               width="100"
               height="100"
