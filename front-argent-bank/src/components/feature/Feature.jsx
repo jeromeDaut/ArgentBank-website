@@ -1,8 +1,8 @@
 
 import React from 'react';
-// import ChatIcon from '../designs/img/icon-chat.png';
-// import MoneyIcon from '../designs/img/icon-money.png';
-// import SecurityIcon from '../designs/img/icon-security.png';
+// import ChatIcon from '../designs/img/icon-chat.webp';
+// import MoneyIcon from '../designs/img/icon-money.webp';
+// import SecurityIcon from '../designs/img/icon-security.webp';
 
 const Feature = () => {
     
@@ -10,7 +10,13 @@ const Feature = () => {
         <section className="features">
           <h2 className="sr-only">Features</h2>
           <div className="feature-item">
-            <img src="/img/icon-chat.png" alt="Chat Icon" className="feature-icon" />
+            <img 
+              src="/img/icon-chat.webp" 
+              alt="Chat Icon" 
+              className="feature-icon"
+              width="100"
+              height="100"
+            />
             <h3 className="feature-item-title">You are our #1 priority</h3>
             <p>
               Need to talk to a representative? You can get in touch through our
@@ -19,9 +25,11 @@ const Feature = () => {
           </div>
           <div className="feature-item">
             <img
-              src="/img/icon-money.png"
+              src="/img/icon-money.webp"
               alt="Chat Icon"
               className="feature-icon"
+              width="100"
+              height="100"
             />
             <h3 className="feature-item-title">More savings means higher rates</h3>
             <p>
@@ -30,9 +38,11 @@ const Feature = () => {
           </div>
           <div className="feature-item">
             <img
-              src="/img/icon-security.png"
+              src="/img/icon-security.webp"
               alt="Chat Icon"
               className="feature-icon"
+              width="100"
+              height="100"
             />
             <h3 className="feature-item-title">Security you can trust</h3>
             <p>
