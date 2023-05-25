@@ -21,7 +21,7 @@ const App = () => {
         <Route path="/login" element={<SignIn />} />
         <Route
           path="/login/dashboard"
-          element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" replace />}
+          element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />}
         />
         {errorOccurred && <Navigate to="*" />}
         <Route path="*" element={<PageNotFound />} />
