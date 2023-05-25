@@ -1,4 +1,4 @@
-import React, {  useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { PutUserName } from "../../app/slice/usersSlice";
 import { useDispatch , useSelector } from 'react-redux';
 
@@ -8,7 +8,9 @@ const HeaderUser = () => {
   const [editing, setEditing] = useState(false);
   const [newUserName, setNewUserName] = useState("");
   
-
+  useEffect(() => {
+    setNewUserName(CurrentUser.userName)
+  }, [CurrentUser.userName]);
   const handleEdit = () => {
    
     setEditing(true);
@@ -35,23 +37,27 @@ const HeaderUser = () => {
           <>
             <h2>Edit User Info</h2>
             <form>
-              <label htmlFor="userName">User name:</label>
-              <input
-                type="text"
-                id="userName"
-                value={newUserName}
-                onChange={(e) => setNewUserName(e.target.value)}
-              />
-              <label htmlFor="firstName">First Name:</label>
-              <input type="text" id="firstName" value={CurrentUser.firstName} disabled />
-              <label htmlFor="lastName">Last Name:</label>
-              <input type="text" id="lastName" value={CurrentUser.lastName} disabled />
-              <button className="edit-button" type="button" onClick={handleSave}>
-                Save
-              </button>
-              <button className="edit-button" type="button" onClick={handleCancel}>
-                Cancel
-              </button>
+              <div className="input-edit">
+                <label htmlFor="userName">User name:</label>
+                <input
+                  type="text"
+                  id="userName"
+                  value={newUserName}
+                  onChange={(e) => setNewUserName(e.target.value)}
+                />
+              </div>
+              <div className="input-edit disabled-bg">
+                <label htmlFor="firstName">First name:</label>
+                <input type="text" id="firstName" value={CurrentUser.firstName} disabled />
+              </div>
+              <div className="input-edit disabled-bg">
+                <label htmlFor="lastName">Last name:</label>
+                <input type="text" id="lastName" value={CurrentUser.lastName} disabled />
+              </div>
+              <div className="btn-edit">
+              <button className="edit-button" type="button" onClick={handleSave}>Save</button>
+              <button className="edit-button" type="button" onClick={handleCancel}>Cancel</button>
+              </div>
             </form>
           </>
         ) : (
@@ -59,7 +65,7 @@ const HeaderUser = () => {
             <h1>
               Welcome back <br/>{CurrentUser.userName}
             </h1>
-            <button className="edit-button" onClick={handleEdit}>
+            <button className="edit-button edit-name-button" onClick={handleEdit}>
               Edit Name
             </button>
           </>
