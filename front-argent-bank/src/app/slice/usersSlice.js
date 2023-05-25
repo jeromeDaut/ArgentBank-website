@@ -15,7 +15,7 @@ export const login = createAsyncThunk(
 export const getProfile = createAsyncThunk(
     'userSlice/getProfile',
     async () => {  
-      const token = store.getState().usersReducer.token    
+      const token = store.getState().usersReducer.token     
       const {data} = await axios.post("http://localhost:3001/api/v1/user/profile", {token},
       { headers: {
         'Content-Type': 'application/json',
@@ -46,11 +46,11 @@ export const getProfile = createAsyncThunk(
 
 const initialState={
     token: localStorage.getItem('token') || null,
-    isLoggedIn: false,
+    isLoggedIn: localStorage.getItem('token') ? true : false,
     currentUser: {},
     loading: false,
     error: null,
-    currentUserId: null
+    // currentUserId: null
 }
 
 const usersSlice= createSlice({
@@ -84,8 +84,8 @@ const usersSlice= createSlice({
 
       builder.addCase(getProfile.fulfilled, (state, action) => {
         state.currentUser = action.payload;
-        state.currentUserId = action.payload.id
-        console.log(state.currentUser.id);
+        // state.currentUserId = action.payload.id
+        // console.log(state.currentUser.id);
         console.log(state.currentUser);
 
         
