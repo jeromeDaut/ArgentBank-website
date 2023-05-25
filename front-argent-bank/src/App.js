@@ -5,7 +5,6 @@ import Navigation from './components/navigation/Navigation';
 import Footer from './components/footer/Footer';
 import SignIn from './Pages/SignIn';
 import Dashboard from './Pages/Dashboard';
-import SignUp from './Pages/SignUp';
 
 const App = () => {
 
@@ -15,8 +14,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<SignIn />} />
-        <Route path="/login/signUp" element={<SignUp />} />
-        <Route path="/login/dashboard/:id" element={<Dashboard />} />
+        <Route path="/login/dashboard" element={<Dashboard />} />
       </Routes>
       <Footer />
     </BrowserRouter>
