@@ -50,7 +50,6 @@ const initialState={
     currentUser: {},
     loading: false,
     error: null,
-    // currentUserId: null
 }
 
 const usersSlice= createSlice({
@@ -84,18 +83,14 @@ const usersSlice= createSlice({
 
       builder.addCase(getProfile.fulfilled, (state, action) => {
         state.currentUser = action.payload;
-        // state.currentUserId = action.payload.id
-        // console.log(state.currentUser.id);
-        console.log(state.currentUser);
+        // console.log(state.currentUser);
 
         
       })
 
       builder.addCase(PutUserName.fulfilled, (state, action) => {
          state.currentUser = action.payload.body;
-        // console.log(action.payload.body);
-
-        
+         // console.log(action.payload.body);
       })
         
       
