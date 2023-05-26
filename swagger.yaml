@@ -101,9 +101,8 @@ paths:
           description: Invalid Fields
         "500":
           description: Internal Server Error
-
+  # ==============================================================================
   /user/account:
-    # Définition de la requête GET pour l'API de récupération des comptes
     get:
       security:
         - Bearer: []
@@ -121,7 +120,6 @@ paths:
         "404":
           description: Page not found
   /user/transaction:
-    # Définition des requêtes GET et PUT pour l'API de transactions
     get:
       security:
         - Bearer: []
@@ -178,6 +176,7 @@ paths:
           description: Page not found
         "500":
           description: Internal Server Error
+# =================================================================
 securityDefinitions:
   Bearer:
     type: apiKey
@@ -233,6 +232,7 @@ definitions:
     properties:
       userName:
         type: string
+  # =======================================================================
   AccountsResponse:
     type: object
     properties:
