@@ -119,7 +119,7 @@ paths:
           description: Internal Server Error
         "404":
           description: Page not found
-  /user/transaction/{accountId}:
+  /user/transaction/{transactionId}:
     get:
       security:
         - Bearer: []
@@ -134,8 +134,8 @@ paths:
           required: true
           type: string
         - in: path
-          name: accountId
-          description: Account ID for filtering transactions
+          name: transactionId
+          description: transaction ID for filtering transactions
           required: true
           type: integer
       responses:
@@ -158,8 +158,8 @@ paths:
       description: API for updating a transaction
       parameters:
         - in: path
-          name: accountId
-          description: Account ID for filtering transactions
+          name: transactionId
+          description: transaction ID for filtering transactions
           required: true
           type: integer
         - in: body
@@ -267,7 +267,7 @@ definitions:
         type: string
       body:
         type: array
-        items: 
+        items:
           type: object
           properties:
             id:
@@ -297,11 +297,17 @@ definitions:
       message:
         type: string
       body:
-        type: array
-        items:
-          type: object
-          properties:
-            category:
-              type: string
-            note:
-              type: string
+        type: object
+        properties:
+          id:
+            type: integer
+          date:
+            type: string
+          description:
+            type: string
+          type:
+            type: string
+          category:
+            type: string
+          note:
+            type: string
