@@ -1,6 +1,7 @@
 import React from 'react';
 
 const featuresData = [
+    // Array of feature objects
     {
         icon: "/img/icon-chat.webp",
         alt: "Chat Icon",
@@ -25,6 +26,7 @@ const Feature = () => {
     return (
         <section className="features">
             <h2 className="sr-only">Features</h2>
+            {/* Mapping over the featuresData array to render individual feature items */}
             {featuresData.map((feature, index) => (
                 <div className="feature-item" key={index}>
                     <img

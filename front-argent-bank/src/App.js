@@ -11,6 +11,7 @@ import { useSelector } from 'react-redux';
 const App = () => {
 
   const errorOccurred = false;
+  // Check if the user is logged in
   const isLoggedIn = useSelector((state) => state.usersReducer.isLoggedIn);
 
   return (
@@ -19,10 +20,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<SignIn />} />
+        {/* Protected route for the dashboard */}
         <Route
           path="/login/dashboard"
           element={isLoggedIn ? <Dashboard /> : <Navigate to="/login" />}
         />
+        {/* Error route */}
         {errorOccurred && <Navigate to="*" />}
         <Route path="*" element={<PageNotFound />} />
       </Routes>

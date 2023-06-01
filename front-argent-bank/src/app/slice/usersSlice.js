@@ -3,6 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import { store } from '../store';
 import axios from "axios";
 
+// Asynchronous action creator for user login
 export const login = createAsyncThunk(
     'userSlice/login',
     async (userData) => {
@@ -12,6 +13,7 @@ export const login = createAsyncThunk(
     }
   );
 
+// Asynchronous action creator for getting user profile
 export const getProfile = createAsyncThunk(
     'userSlice/getProfile',
     async () => {  
@@ -28,40 +30,42 @@ export const getProfile = createAsyncThunk(
     }
   );
 
-  export const PutUserName = createAsyncThunk(
-    'userSlice/PutUserName',
-    async (userName) => { 
-      const token = store.getState().usersReducer.token      
-      const {data} = await axios.put("http://localhost:3001/api/v1/user/profile", {userName},
-      { headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${token}`,
-      },
-    }
-      );
-       console.log(data)
-      return data;
-    }
-  );
+// Asynchronous action creator for updating user name
+export const PutUserName = createAsyncThunk(
+  'userSlice/PutUserName',
+  async (userName) => { 
+    const token = store.getState().usersReducer.token      
+    const {data} = await axios.put("http://localhost:3001/api/v1/user/profile", {userName},
+    { headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    },
+  }
+    );
+      console.log(data)
+    return data;
+  }
+);
 
+// Initial state for the users slice
 const initialState={
     token: localStorage.getItem('token') || null,
     isLoggedIn: localStorage.getItem('token') ? true : false,
     currentUser: {},
-    loading: false,
     error: null,
 }
 
+// Create the users slice
 const usersSlice= createSlice({
     name:'userSlice',
     initialState,
-    reducers:{      
+    reducers:{  
+      // Reducer for user logout    
       logout(state) {
         state.token = null;
         localStorage.clear();
         state.isLoggedIn= false;
         state.currentUser = {};
-        state.loading = false;
         state.error = null;
       },
     },
@@ -69,7 +73,7 @@ const usersSlice= createSlice({
     extraReducers: (builder) => {      
       builder.addCase(login.fulfilled, (state, action) => {
         state.token = action.payload.token;
-        localStorage.setItem('token', action.payload.token); // Stockage du token dans le localStorage
+        localStorage.setItem('token', action.payload.token);
         state.error = null;
         state.isLoggedIn=true;        
       })
@@ -84,8 +88,6 @@ const usersSlice= createSlice({
       builder.addCase(getProfile.fulfilled, (state, action) => {
         state.currentUser = action.payload;
         // console.log(state.currentUser);
-
-        
       })
 
       builder.addCase(PutUserName.fulfilled, (state, action) => {

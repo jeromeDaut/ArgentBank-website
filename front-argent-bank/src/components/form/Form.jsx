@@ -5,10 +5,11 @@ import { login } from '../../app/slice/usersSlice';
 import {HiUserCircle} from 'react-icons/hi2'
 
 const Form = () => {
+  // State variables
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  
+  // Redux hooks
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -18,17 +19,19 @@ const Form = () => {
       setError('Please enter both email and password.');
       return;
     }
-    
+    // Dispatch login action and handle response
     dispatch(login({ email, password }))
       .then((response) => {
+         // Store token in local storage
         localStorage.setItem('token', response.payload.token);
+        // Navigate to dashboard after successful login
         navigate(`/login/dashboard`);
       })
       .catch((error) => {
         setError('Invalid email or password.');
       });
   }
-  
+  // Check if user is already logged in
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
   if (isLoggedIn === false) {
     navigate('/login');
@@ -37,6 +40,7 @@ const Form = () => {
       <section className="sign-in-content">
       <HiUserCircle className='sign-in-icon' />
       <h1>Sign In</h1>
+      {/* Display error message if there is an error */}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div className="input-wrapper">

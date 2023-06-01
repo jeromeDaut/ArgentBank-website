@@ -36,6 +36,7 @@ useEffect(() => {
       <main className='main bg-dark'>
         <HeaderUser  />
         <>
+        {/* Render account components */}
         {accountData.map((account, index) => (
         <Account
           key={index}

@@ -1,6 +1,11 @@
 import React from 'react';
 
 const Account = ({ title, amount, description }) => {
+    // Account component that displays an account section
+  // Props:
+  // - title: The title of the account
+  // - amount: The amount of the account
+  // - description: The description of the account
   return (
     <section className="account">
       <div className="account-content-wrapper">

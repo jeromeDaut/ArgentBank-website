@@ -3,16 +3,20 @@ import { PutUserName } from "../../app/slice/usersSlice";
 import { useDispatch , useSelector } from 'react-redux';
 
 const HeaderUser = () => {
+    // Redux hooks
   const dispatch = useDispatch();
   let CurrentUser = useSelector((state) => state.usersReducer.currentUser); 
+
+    // State variables
   const [editing, setEditing] = useState(false);
   const [newUserName, setNewUserName] = useState("");
   
+    // Set initial value for newUserName when CurrentUser.userName changes
   useEffect(() => {
     setNewUserName(CurrentUser.userName)
   }, [CurrentUser.userName]);
+
   const handleEdit = () => {
-   
     setEditing(true);
   };
 
@@ -39,6 +43,7 @@ const HeaderUser = () => {
             <form>
               <div className="input-edit">
                 <label htmlFor="userName">User name:</label>
+                 {/* Input for new user name */}
                 <input
                   type="text"
                   id="userName"

@@ -6,16 +6,19 @@ import {HiUserCircle} from 'react-icons/hi2'
 import {FaSignOutAlt} from 'react-icons/fa'
 
 const Navigation = () => {
-
+  // Redux hooks
   const isLoggedIn = useSelector((state) => state.usersReducer.isLoggedIn);
   const dispatch = useDispatch();
   let userName  = useSelector((state) => state.usersReducer.currentUser.userName) ;
 
+  // Handle sign out
   const handleSignOut = () => {
     dispatch(logout());
   }
+
   return (
     <nav className="main-nav">
+    {/* Logo */}
       <Link className="main-nav-logo" to="/">
         <img
           className="main-nav-logo-image"
@@ -27,6 +30,7 @@ const Navigation = () => {
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
       <div className='align-nav-item'>
+      {/* If logged in */}
         {isLoggedIn ? (
           <>
             <Link className="main-nav-item" to="login/dashboard">
